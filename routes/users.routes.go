@@ -25,6 +25,8 @@ func GetUserHandler(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusNotFound)
 	}
 
+	db.DB.Model(&user).Association("Tasks").Find(&user.Tasks)
+
 	json.NewEncoder(w).Encode(&user)
 
 }
